@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20171021195501) do
     t.boolean "on_homepage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "price"
+    t.string "price"
     t.string "description"
     t.index ["maker_id"], name: "index_products_on_maker_id"
     t.index ["sub_product_type_id"], name: "index_products_on_sub_product_type_id"

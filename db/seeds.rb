@@ -16,16 +16,29 @@ admin1.save
   Maker.where(name: Faker::Company.name).first_or_create
 end
 
+['Home & Kitchen', 'Clothing', 'Footwear', 'Industry'].each do |product_type|
+  ProductType.where(type_name: product_type).first_or_create
+end
 
-home_product = ProductType.where(type_name: 'Home').first_or_create
-home_product.sub_product_types.where(type_name: 'Kitchen').first_or_create
-home_product.sub_product_types.where(type_name: 'Dining').first_or_create
-home_product.sub_product_types.where(type_name: 'Cleaning').first_or_create
-
-office_product = ProductType.where(type_name: 'Office').first_or_create
-office_product.sub_product_types.where(type_name: 'Furniture').first_or_create
-office_product.sub_product_types.where(type_name: 'Rigistry').first_or_create
-
-industry_product = ProductType.where(type_name: 'Industry').first_or_create
-industry_product.sub_product_types.where(type_name: 'Factry').first_or_create
-industry_product.sub_product_types.where(type_name: 'Michinary').first_or_create
+ProductType.all.each do |product_type|
+  (1..3).each do
+    product_type.sub_product_types.where(type_name: Faker::Commerce.department).first_or_create
+  end
+end
+SubProductType.all.each do |sub_type|
+  (0..3).each do
+    product = sub_type.products.where(name: Faker::Commerce.product_name).first_or_initialize
+    product.qty = rand(100),
+    product.maker = Maker.all.sample,
+    product.color = Faker::Color.color_name,
+    product.code = Faker::Commerce.promotion_code,
+    product.on_homepage = [true, false].sample,
+    product.price = Faker::Commerce.price,
+    product.description = "#{product.name}, #{product.color}, #{product.code}"
+    product.save
+    (0..3).each do
+      product.photos.create(image_url: Faker::Avatar.image(nil, "400x300"))
+    end
+    product.set_cover_photo
+  end
+end
