@@ -24,3 +24,5 @@ if defined?(ActiveRecord::Base)
   ActiveRecord::Base.extend Dragonfly::Model
   ActiveRecord::Base.extend Dragonfly::Model::Validations
 end
+
+require "#{Rails.root}/lib/blank_img.rb"
