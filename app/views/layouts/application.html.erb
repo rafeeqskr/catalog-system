@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CatalogSystem</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Catalog System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+          <% @menu_product_types.each do |product_type| %>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #343a40;border-color: #343a40">
+                <%= product_type.type_name %>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% product_type.sub_product_types.each do |sub_product_type| %>
+                <a class="dropdown-item" href="<%= products_path(sub_type: sub_product_type.type_name) %>"><%= sub_product_type.type_name %></a>
+                <% end %>
+              </div>
+            </div>
+          </li>
+          <% end %>
+
+
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+
+
+          <li class="nav-item active">
+            <a class="nav-link" href="<%= home_contactus_path %>">Contact</a>
+          </li>
+          <% unless devise_controller? %>
+
+          <% if user_signed_in? %>
+          <li class="nav-item">
+
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #343a40;border-color: #343a40">
+                <%= image_tag current_user.gravatar_url, :filetype => :gif, :size => 40 %>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Profile</a>
+                <% if current_user.admin? %>
+                <%= link_to('Products', products_path, class: "dropdown-item") %>
+                <%= link_to('ProductTypes', sub_product_types_path, class: "dropdown-item") %>
+                <% end %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to('Login', new_user_session_path, class: "nav-link")  %>
+          </li>
+          <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class='main-div'>
+    <%= yield %>
+  </div>
+
+  <br /><br /><br /><br />
+  <!-- Footer -->
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>

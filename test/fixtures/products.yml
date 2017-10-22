@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  qty: 1
+  maker: one
+  color: MyString
+  code: MyString
+  sub_product_type: one
+  on_homepage: false
+
+two:
+  name: MyString
+  qty: 1
+  maker: two
+  color: MyString
+  code: MyString
+  sub_product_type: two
+  on_homepage: false

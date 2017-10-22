@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Please Login</h3>
+				</div>
+				<div class="panel-body">
+					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+					<% flash.each do |name, msg| %>
+						<% if msg.class == Array %>
+							<% msg.each do |message| %>
+								<%= content_tag :div, message, :id => "flash_#{name}" %>
+							<% end %>
+						<% else %>
+							<%= content_tag :div, msg, :id => "flash_#{name}" %>
+						<% end %>
+					<% end %>
+
+					<fieldset>
+						<div class="form-group">
+							<%= f.text_field :email, autofocus: true, class: "form-control", placeholder: "E-mail or name" %>
+						</div>
+						<div class="form-group">
+							<%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password"%>
+						</div>
+						<!-- Change this to a button or input when using this as a form -->
+						<%= f.submit "Login", class: "btn btn-success btn-block" %>
+						<p>New Member? <%= link_to "Sign up", new_registration_path(resource_name) %>
+						</fieldset>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%#= render "devise/shared/links" %>

@@ -1,0 +1,120 @@
+
+    <%= form_for(@product, class: "form-horizontal", :html => { :multipart => true }) do |f| %>
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Add Product</legend>
+
+      <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="fn">Name</label>
+        <div class="col-md-10">
+          <%= f.text_field :name, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="fn">Description</label>
+        <div class="col-md-10">
+          <%= f.text_field :description, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="ln">Quntity</label>
+        <div class="col-md-10">
+          <%= f.number_field :qty, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="fn">Price</label>
+        <div class="col-md-10">
+          <%= f.text_field :price, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="cmpny">Maker</label>
+        <div class="col-md-10">
+          <%= f.collection_select :maker_id, @makers, :id, :name, {}, {class: "form-control"} %>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="email">Color</label>
+        <div class="col-md-10">
+          <%= f.text_field :color, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="add1">Code</label>
+        <div class="col-md-10">
+          <%= f.text_field :code, class: "form-control input-md" %>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="add2">Product type</label>
+        <div class="col-md-10">
+          <%= select_tag :product_type_id, options_from_collection_for_select(@product_types, "id", "type_name"), class: "form-control", selected: @product_types.first.id  %>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="add2">Product Sub type</label>
+        <div class="col-md-10">
+          <%= f.collection_select :sub_product_type_id, @product_types.first.sub_product_types, 'id', 'type_name', {}, {class: "form-control"} %>
+        </div>
+      </div>
+
+      <%= f.fields_for :photos_attributes do |p| %>
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="add2">Images</label>
+        <div class="col-md-10">
+          <%= p.file_field :image, multiple: :true %>
+        </div>
+      </div>
+      <% end %>
+
+
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="add2">Product type</label>
+        <div class="col-md-10">
+          <%= f.check_box :on_homepage, class: "form-control" %>
+        </div>
+      </div>
+
+
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-10 control-label" for="submit"></label>
+        <div class="col-md-10">
+          <%= f.submit 'Submit',  class: "btn btn-primary"%>
+
+        </div>
+      </div>
+
+
+    </fieldset>
+    <% end %>

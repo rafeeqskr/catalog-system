@@ -1,0 +1,5 @@
+---
+name: 400x300
+mime_type: image/png
+model_class: Photo
+model_attachment: image

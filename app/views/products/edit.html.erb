@@ -1,0 +1,23 @@
+
+<div class='row'>
+  <div class='col-md-6'>
+
+  <%= render 'form' %>
+
+</div>
+
+<div class='col-md-6'>
+  <% @product.photos.each do |photo| %>
+  <div class="col-lg-10 col-md-4 col-xs-6">
+    <div >
+      <img class="card-img-top" src="<%= photo.image.url %>" alt="" style="height:150px;width:150px">
+      <br />
+      <%=link_to 'Remove Image', product_remove_photo_path(@product, photo), method: :delete %> ||
+      <%=link_to 'Make a Cover Image', product_make_a_cover_photo_path(@product, photo) unless @product.cover_photo == photo %>
+
+
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="new_product_type" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Product Sub Type</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@product_type, url: add_product_type_sub_product_types_path) do |f| %>
+        <div class="form-group">
+              <%= f.text_field :type_name, autofocus: true, class: "form-control", placeholder: "Name"%>
+        </div>
+
+          <div class="form-group">
+            <%= f.submit "Save", class: "btn btn-success btn-block" %>
+          </div>
+        <% end %>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

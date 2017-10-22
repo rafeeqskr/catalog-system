@@ -1,0 +1,38 @@
+<!-- Page Content -->
+<div class="container">
+<div class='row'>
+  <div class='col-md-9'>
+    <h1 class="my-4 text-center text-lg-left">Products</h1>
+  </div>
+  <div class='col-md-3'>
+    <%= link_to 'New Product', new_product_path, class: "btn btn-info btn-lg" %>
+  </div>
+</div>
+
+
+  <div class="row text-center text-lg-left">
+  <% @products.each do |product| %>
+  <div class="col-lg-3 col-md-4 col-xs-6">
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src="<%= product.cover_photo.image.url %>" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="<%= product_path(product) %>"><%= product.name %></a>
+        </h4>
+        <h5>₹<%= product.price || 0 %>.00</h5>
+        <p class="card-text"><%= product.description %></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+      </div>
+    </div>
+  </div>
+
+
+
+  <% end  %>
+
+</div>
+
+</div>
+<!-- /.container -->
