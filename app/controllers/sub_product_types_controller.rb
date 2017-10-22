@@ -1,5 +1,6 @@
 class SubProductTypesController < ApplicationController
   before_action :set_sub_product_type, only: [:edit, :destroy, :update]
+  before_action :is_admin?
   def index
     @sub_product_types = SubProductType.includes(:product_type).all
     @sub_product_type = SubProductType.new

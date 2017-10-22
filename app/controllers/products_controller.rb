@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :is_admin?, only: [:new, :create, :update, :delete]
+  before_action :is_admin?, only: [:new, :edit, :create, :update, :delete]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :make_a_cover_photo, :remove_photo]
 
   def index
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @makers = Maker.select(:id, :name)
     @product_types = ProductType.select(:id, :type_name)
-    
+
   end
 
   def create
@@ -68,13 +68,11 @@ class ProductsController < ApplicationController
   def customer_params
     params.require(:product).permit()
   end
-  def is_admin?
-    redirect_to root_path unless current_user.admin?
-  end
+
   def product_params
     params.require(:product).permit(:name, :qty, :maker_id, :color, :code, :sub_product_type_id, :on_homepage, :price, :description)
   end
   def filter_params
-    params.slice(:name, :type, :sub_type, :maker_id, :color, :code)
+    params.slice(:product_name, :category, :sub_type, :maker, :color, :code)
   end
 end

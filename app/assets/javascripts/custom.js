@@ -20,4 +20,8 @@ $(document).ready(function(){
       }
     });
   });
+
+  $('.form_submit').change(function() {
+    $(this).closest('form').submit();
+  });
 });

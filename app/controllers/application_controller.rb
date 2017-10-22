@@ -16,5 +16,7 @@ class ApplicationController < ActionController::Base
   def set_product_types
     @menu_product_types = ProductType.joins(:sub_product_types).includes(:sub_product_types).all
   end
-
+  def is_admin?
+    redirect_to root_path unless current_user.admin?
+  end
 end

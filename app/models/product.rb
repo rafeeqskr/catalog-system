@@ -6,6 +6,10 @@ class Product < ApplicationRecord
   has_one :cover_photo, -> { where(main_image: true) }, class_name: 'Photo'
 
   scope :home_products, -> { where on_homepage: true }
+  scope :product_name, -> (name){ where name: name }
+  scope :color, -> (color){ where name: color }
+  scope :maker, -> (maker_id){ where maker_id: maker_id }
+  scope :category, -> (category){ joins(:product_type).where(product_types: {type_name: category}) }
   scope :sub_type, -> (type_name) { joins(:sub_product_type).where(sub_product_types: {type_name: type_name}) }
   include ProductSearch
 

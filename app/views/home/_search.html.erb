@@ -1,0 +1,53 @@
+<%= form_tag products_path, method: :get do %>
+
+<div class="form-group">
+  <label for="email">
+    Product</label>
+    <div class="input-group">
+      <%= text_field_tag :product_name, '', class: "form-control form_submit" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">
+      Colour</label>
+      <div class="input-group">
+        <%= text_field_tag :color, '', class: "form-control form_submit" %>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="email">
+        Code</label>
+        <div class="input-group">
+          <%= text_field_tag :code, '', class: "form-control form_submit" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">
+          Product Type</label>
+          <div class="input-group">
+            <%= select_tag "category", options_from_collection_for_select(@product_types, "id", "type_name"), {class: "form-control form_submit", include_blank: true} %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            Sub Type</label>
+            <div class="input-group">
+              <%= select_tag "sub_type", options_from_collection_for_select(@sub_product_types, "id", "type_name"), {class: "form-control form_submit", include_blank: true} %>
+            </div>
+          </div>
+
+
+      <div class="form-group">
+        <label for="email">
+          Makers</label>
+          <div class="input-group">
+            <%= select_tag "maker", options_from_collection_for_select(@makers, "id", "name"), {class: "form-control form_submit", include_blank: true} %>
+          </div>
+        </div>
+
+        <% end %>
