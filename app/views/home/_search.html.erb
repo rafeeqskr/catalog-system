@@ -29,7 +29,7 @@
         <label for="email">
           Product Type</label>
           <div class="input-group">
-            <%= select_tag "category", options_from_collection_for_select(@product_types, "id", "type_name"), {class: "form-control form_submit", include_blank: true} %>
+            <%= select_tag "category", options_from_collection_for_select(@product_types, "type_name", "type_name"), {class: "form-control form_submit", include_blank: true} %>
           </div>
         </div>
 
@@ -37,7 +37,7 @@
           <label for="email">
             Sub Type</label>
             <div class="input-group">
-              <%= select_tag "sub_type", options_from_collection_for_select(@sub_product_types, "id", "type_name"), {class: "form-control form_submit", include_blank: true} %>
+              <%= select_tag "sub_type", options_from_collection_for_select(@sub_product_types, "type_name", "type_name"), {class: "form-control form_submit", include_blank: true} %>
             </div>
           </div>
 
