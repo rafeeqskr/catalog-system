@@ -27,7 +27,7 @@ class Product < ApplicationRecord
   end
   def update_photos(photos)
     photos.each do |image|
-      @product.photos.create(image: image)
+      self.photos.create(image: image)
     end
     set_cover_photo
   end

@@ -39,6 +39,5 @@ SubProductType.all.each do |sub_type|
     (0..3).each do
       product.photos.create(image_url: Faker::Avatar.image(nil, "400x300"))
     end
-    product.set_cover_photo
   end
 end

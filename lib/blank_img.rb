@@ -5,4 +5,6 @@ class NilClass
   def image
     nil
   end
+
+  alias_method :remote_url, :url
 end
